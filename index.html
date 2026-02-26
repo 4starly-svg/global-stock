@@ -5,9 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Global Trade Capital</title>
 <style>
-/* --- GENERAL STYLES --- */
 body {
-    margin: 0;
+    margin:0;
     font-family: Arial, Helvetica, sans-serif;
     background: #0b0f14;
     color: #e6e6e6;
@@ -15,10 +14,10 @@ body {
 header {
     background: #111820;
     padding: 20px;
-    border-bottom: 1px solid #222;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid #222;
 }
 .logo {
     font-size: 28px;
@@ -32,67 +31,51 @@ nav a {
     font-weight: bold;
 }
 nav a:hover { color: #d4af37; }
+
 .container {
-    display: flex;
-    height: calc(100vh - 80px);
-}
-.sidebar {
-    width: 25%;
-    border-right: 1px solid #222;
-    overflow-y: auto;
-    background: #111820;
-}
-.sidebar h2 {
-    padding: 15px;
-    border-bottom: 1px solid #222;
-    margin: 0;
-    color: #d4af37;
-}
-.item {
-    padding: 12px;
-    cursor: pointer;
-    border-bottom: 1px solid #1a1a1a;
-}
-.item:hover { background: #151c25; }
-.trade {
-    width: 75%;
     padding: 25px;
-    overflow-y: auto;
 }
-.trade h2 { color: #d4af37; }
-input, select {
-    width: 100%;
-    padding: 12px;
-    margin-top: 10px;
-    background: #121821;
-    border: 1px solid #333;
-    color: white;
-    border-radius: 6px;
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
-button {
-    margin-top: 15px;
-    padding: 14px;
-    width: 100%;
-    background: #d4af37;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 6px;
-}
-button:hover { background: #b8962f; }
-.footer {
-    padding: 20px;
-    font-size: 13px;
+.card {
+    background: #111820;
+    padding: 25px;
+    margin: 15px;
+    border-radius: 12px;
+    width: 280px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
     text-align: center;
+}
+.card h2 { margin-bottom: 10px; color: #d4af37; }
+.price { font-size: 28px; margin-top: 10px; }
+
+.testimonials, .contact {
+    background: #111820;
+    padding: 25px;
+    margin: 25px auto;
+    max-width: 900px;
+    border-radius: 12px;
+}
+.testimonials h2, .contact h2 { color: #d4af37; }
+.testimonials p, .contact p { margin-top: 12px; font-size: 16px; line-height: 1.5; }
+
+footer {
+    margin-top: 40px;
+    padding: 20px;
+    text-align: center;
+    font-size: 13px;
     border-top: 1px solid #222;
     color: #777;
 }
 
-/* Scrollbar styling */
-.sidebar::-webkit-scrollbar, .trade::-webkit-scrollbar {
+/* Scrollbars */
+.cards::-webkit-scrollbar, .container::-webkit-scrollbar {
     width: 8px;
 }
-.sidebar::-webkit-scrollbar-thumb, .trade::-webkit-scrollbar-thumb {
+.cards::-webkit-scrollbar-thumb, .container::-webkit-scrollbar-thumb {
     background-color: #555;
     border-radius: 4px;
 }
@@ -112,63 +95,51 @@ button:hover { background: #b8962f; }
 
 <div class="container">
 
-<!-- --- SIDEBAR --- -->
-<div class="sidebar">
-<h2>Instruments</h2>
-<div class="item">AAPL</div>
-<div class="item">TSLA</div>
-<div class="item">BTC/USD</div>
-<div class="item">ETH/USD</div>
-<div class="item">EUR/USD</div>
-<div class="item">USD/JPY</div>
-<div class="item">MSFT</div>
-<div class="item">AMZN</div>
-<!-- Add more stocks, crypto, FX as needed -->
+<div class="cards">
+<div class="card">
+<h2>Bitcoin (BTC)</h2>
+<div class="price" id="btc">Loading...</div>
+</div>
+<div class="card">
+<h2>Apple (AAPL)</h2>
+<div class="price" id="aapl">Loading...</div>
+</div>
+<div class="card">
+<h2>Tesla (TSLA)</h2>
+<div class="price" id="tsla">Loading...</div>
+</div>
+<!-- Add more cards as needed -->
 </div>
 
-<!-- --- TRADE PANEL --- -->
-<div class="trade">
-<h2>Trade Engine</h2>
-<label>Symbol</label>
-<input type="text" placeholder="Enter symbol (Stock/Crypto/FX)">
+<!-- TESTIMONIALS -->
+<div class="testimonials">
+<h2>Testimonials</h2>
+<p>“Global Trade Capital makes tracking my investments easy and fast. Highly recommend!” – Sarah M.</p>
+<p>“I love the real-time numbers and clean layout. It’s my go-to dashboard.” – Ahmed A.</p>
+<p>“Professional, sleek, and reliable. Exactly what I needed.” – Lina K.</p>
+</div>
 
-<label>Order Type</label>
-<select>
-<option>Market</option>
-<option>Limit</option>
-<option>Stop</option>
-</select>
-
-<label>Quantity</label>
-<input type="number" placeholder="0">
-
-<button>EXECUTE TRADE</button>
-
-<hr style="margin:20px 0; border:1px solid #222;">
-
-<h3>Contact Us</h3>
+<!-- CONTACT US -->
+<div class="contact">
+<h2>Contact Us</h2>
 <p>Email: support@globaltradecapital.com</p>
-<p>Phone: +218 91 234 5678</p>
-
-<hr style="margin:20px 0; border:1px solid #222;">
-
-<h3>Disclaimer</h3>
-<p>Global Trade Capital is a simulated trading interface. All prices are for educational purposes only. Not financial advice.</p>
+<p>Phone (Libya): +218 91 234 5678</p>
+<p>Languages: English / Arabic</p>
 </div>
 
 </div>
 
-<div class="footer">
+<footer>
 © 2026 Global Trade Capital. All rights reserved.
-</div>
+</footer>
 
+<!-- API scripts -->
+<script src="api/stocks.js"></script>
+<script src="api/crypto.js"></script>
+<script src="api/fx.js"></script>
 <script>
-// --- CALL EXISTING API FILES ---
-// Stocks
 if (typeof loadStocks === "function") loadStocks();
-// Crypto
 if (typeof loadCrypto === "function") loadCrypto();
-// FX
 if (typeof loadFX === "function") loadFX();
 </script>
 
