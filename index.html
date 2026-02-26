@@ -4,50 +4,97 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Global Trade Capital</title>
-
 <style>
+/* --- GENERAL STYLES --- */
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #0d1117;
-    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #0b0f14;
+    color: #e6e6e6;
 }
-
 header {
+    background: #111820;
     padding: 20px;
-    text-align: center;
+    border-bottom: 1px solid #222;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo {
     font-size: 28px;
     font-weight: bold;
-    background: #111827;
-    border-bottom: 1px solid #1f2937;
+    color: #d4af37;
 }
-
+nav a {
+    color: #aaa;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+nav a:hover { color: #d4af37; }
 .container {
-    padding: 40px;
-    text-align: center;
+    display: flex;
+    height: calc(100vh - 80px);
 }
-
-.card {
-    background: #161b22;
+.sidebar {
+    width: 25%;
+    border-right: 1px solid #222;
+    overflow-y: auto;
+    background: #111820;
+}
+.sidebar h2 {
+    padding: 15px;
+    border-bottom: 1px solid #222;
+    margin: 0;
+    color: #d4af37;
+}
+.item {
+    padding: 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #1a1a1a;
+}
+.item:hover { background: #151c25; }
+.trade {
+    width: 75%;
     padding: 25px;
-    margin: 20px auto;
-    border-radius: 12px;
-    max-width: 400px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    overflow-y: auto;
 }
-
-.price {
-    font-size: 30px;
+.trade h2 { color: #d4af37; }
+input, select {
+    width: 100%;
+    padding: 12px;
     margin-top: 10px;
+    background: #121821;
+    border: 1px solid #333;
+    color: white;
+    border-radius: 6px;
+}
+button {
+    margin-top: 15px;
+    padding: 14px;
+    width: 100%;
+    background: #d4af37;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+}
+button:hover { background: #b8962f; }
+.footer {
+    padding: 20px;
+    font-size: 13px;
+    text-align: center;
+    border-top: 1px solid #222;
+    color: #777;
 }
 
-footer {
-    margin-top: 60px;
-    padding: 20px;
-    text-align: center;
-    font-size: 14px;
-    background: #111827;
-    border-top: 1px solid #1f2937;
+/* Scrollbar styling */
+.sidebar::-webkit-scrollbar, .trade::-webkit-scrollbar {
+    width: 8px;
+}
+.sidebar::-webkit-scrollbar-thumb, .trade::-webkit-scrollbar-thumb {
+    background-color: #555;
+    border-radius: 4px;
 }
 </style>
 </head>
@@ -55,48 +102,74 @@ footer {
 <body>
 
 <header>
-GLOBAL TRADE CAPITAL
+<div class="logo">GLOBAL TRADE CAPITAL</div>
+<nav>
+<a href="stocks.html">Stocks</a>
+<a href="crypto.html">Crypto</a>
+<a href="fx.html">FX</a>
+</nav>
 </header>
 
 <div class="container">
 
-<div class="card">
-<h2>Bitcoin (BTC)</h2>
-<div class="price" id="btc">Loading...</div>
+<!-- --- SIDEBAR --- -->
+<div class="sidebar">
+<h2>Instruments</h2>
+<div class="item">AAPL</div>
+<div class="item">TSLA</div>
+<div class="item">BTC/USD</div>
+<div class="item">ETH/USD</div>
+<div class="item">EUR/USD</div>
+<div class="item">USD/JPY</div>
+<div class="item">MSFT</div>
+<div class="item">AMZN</div>
+<!-- Add more stocks, crypto, FX as needed -->
 </div>
 
-<div class="card">
-<h2>Apple (AAPL)</h2>
-<div class="price" id="aapl">Loading...</div>
+<!-- --- TRADE PANEL --- -->
+<div class="trade">
+<h2>Trade Engine</h2>
+<label>Symbol</label>
+<input type="text" placeholder="Enter symbol (Stock/Crypto/FX)">
+
+<label>Order Type</label>
+<select>
+<option>Market</option>
+<option>Limit</option>
+<option>Stop</option>
+</select>
+
+<label>Quantity</label>
+<input type="number" placeholder="0">
+
+<button>EXECUTE TRADE</button>
+
+<hr style="margin:20px 0; border:1px solid #222;">
+
+<h3>Contact Us</h3>
+<p>Email: support@globaltradecapital.com</p>
+<p>Phone: +218 91 234 5678</p>
+
+<hr style="margin:20px 0; border:1px solid #222;">
+
+<h3>Disclaimer</h3>
+<p>Global Trade Capital is a simulated trading interface. All prices are for educational purposes only. Not financial advice.</p>
 </div>
 
-<div class="card">
-<h2>Tesla (TSLA)</h2>
-<div class="price" id="tsla">Loading...</div>
 </div>
 
-</div>
-
-<footer>
+<div class="footer">
 © 2026 Global Trade Capital. All rights reserved.
-</footer>
+</div>
 
 <script>
-async function getCrypto() {
-    const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd");
-    const data = await response.json();
-    document.getElementById("btc").innerText = "$" + data.bitcoin.usd;
-}
-
-async function getStocks() {
-    const response = await fetch("https://financialmodelingprep.com/api/v3/quote/AAPL,TSLA?apikey=demo");
-    const data = await response.json();
-    document.getElementById("aapl").innerText = "$" + data[0].price;
-    document.getElementById("tsla").innerText = "$" + data[1].price;
-}
-
-getCrypto();
-getStocks();
+// --- CALL EXISTING API FILES ---
+// Stocks
+if (typeof loadStocks === "function") loadStocks();
+// Crypto
+if (typeof loadCrypto === "function") loadCrypto();
+// FX
+if (typeof loadFX === "function") loadFX();
 </script>
 
 </body>
