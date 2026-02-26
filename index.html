@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Global Trade Dashboard</title>
+<style>
+  body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f5f5f5; }
+  header { background:#1f2937; color:#fff; padding:20px; text-align:center; display:flex; align-items:center; justify-content:center; gap:10px; }
+  header img { height:50px; }
+  main { padding:20px; max-width:1200px; margin:auto; }
+  h2 { margin-top:40px; }
+  table { width:100%; border-collapse:collapse; margin-top:20px; }
+  th, td { border:1px solid #ccc; padding:10px; text-align:center; }
+  th { background:#4b5563; color:#fff; }
+  .section { margin-top:40px; background:#fff; padding:20px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.1);}
+  .testimonial { margin-bottom:15px; font-style:italic; }
+  .contact input, .contact textarea { width:100%; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:5px; }
+  .contact button { padding:10px 20px; background:#1f2937; color:#fff; border:none; border-radius:5px; cursor:pointer; }
+  .news-item { margin-bottom:15px; }
+</style>
+</head>
+<body>
+
+<header>
+  <img src="https://via.placeholder.com/50" alt="Logo">
+  <h1>Global Trade Dashboard</h1>
+</header>
+
+<main>
+
+<!-- Live Stock Prices -->
+<section class="section">
+  <h2>Live Global Stock Prices</h2>
+  <table id="stockTable">
+    <thead>
+      <tr>
+        <th>Symbol</th>
+        <th>Price</th>
+        <th>Change</th>
+        <th>Time</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<!-- News -->
+<section class="section">
+  <h2>Latest Stock News</h2>
+  <div id="newsList">Loading news...</div>
+</section>
+
+<!-- Testimonials -->
+<section class="section">
+  <h2>What Our Users Say</h2>
+  <div class="testimonial">"This dashboard makes tracking stocks so easy!" - Jenna</div>
+  <div class="testimonial">"Finally a dashboard that works globally." - Amro S.</div>
+</section>
+
+<!-- Contact Us -->
+<section class="section contact">
+  <h2>Contact Us</h2>
+  <input type="text" placeholder="Your Name">
+  <input type="email" placeholder="Your Email">
+  <textarea placeholder="Your Message"></textarea>
+  <button>Send Message</button>
+</section>
+
+</main>
+
+<script>
+  // ===== YOUR EMBEDDED API KEY =====
+  const apiKey = "D6A0RQ1R01QSJLBN99SSGD6A0RQ1R01QSJLBN99ST0";
+  const symbols = ["AAPL","AMZN","GOOGL","MSFT"];
+  const tableBody = document.querySelector("#stockTable tbody");
+  const newsList = document.querySelector("#newsList");
+
+  // Fetch live stock prices
+  async function fetchPrices() {
+    tableBody.innerHTML = "";
+    for (let symbol of symbols) {
+      try {
+        const res = await fetch(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${apiKey}`);
+        const data = await res.json();
+        const change = (data.c - data.pc).toFixed(2);
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${symbol}</td>
+          <td>$${data.c}</td>
+          <td style="color:${change>=0?'green':'red'}">${change}</td>
+          <td>${new Date().toLocaleTimeString()}</td>
+        `;
+        tableBody.appendChild(row);
+      } catch(err) {
+        const row = document.createElement("tr");
+        row.innerHTML = `<td colspan="4" style="color:red">Error loading ${symbol}</td>`;
+        tableBody.appendChild(row);
+      }
+    }
+  }
+
+  // Fetch latest news
+  async function fetchNews() {
+    try {
+      const res = await fetch(`https://finnhub.io/api/v1/news?category=general&token=${apiKey}`);
+      const news = await res.json();
+      newsList.innerHTML = "";
+      news.slice(0,5).forEach(item => {
+        const div = document.createElement("div");
+        div.className = "news-item";
+        div.innerHTML = `<a href="${item.url}" target="_blank">${item.headline}</a>`;
+        newsList.appendChild(div);
+      });
+    } catch(err) {
+      newsList.innerHTML = "<p style='color:red'>Error loading news</p>";
+    }
+  }
+
+  // Initial fetch and intervals
+  fetchPrices();
+  fetchNews();
+  setInterval(fetchPrices, 5000);
+  setInterval(fetchNews, 60000); // refresh news every 1 min
+</script>
+
+</body>
+</html>
