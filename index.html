@@ -29,7 +29,7 @@
   <h2>Live Stocks</h2>
   <table id="stocks">
     <thead>
-      <tr><th>Symbol</th><th>Price</th><th>Change</th></tr>
+      <tr><th>Symbol</th><th>Price</th></tr>
     </thead>
     <tbody></tbody>
   </table>
@@ -57,7 +57,7 @@
 </div>
 
 <script>
-// Load live stock prices
+// Load live stock prices from Twelve Data
 async function loadStocks() {
   try {
     const res = await fetch("/api/stocks");
@@ -66,12 +66,10 @@ async function loadStocks() {
     tbody.innerHTML = "";
 
     data.forEach(stock => {
-      const change = (stock.c - stock.pc).toFixed(2);
       const row = document.createElement("tr");
       row.innerHTML = `
         <td>${stock.symbol}</td>
-        <td>$${stock.c}</td>
-        <td style="color:${change >= 0 ? 'green':'red'}">${change}</td>
+        <td>$${stock.price}</td>
       `;
       tbody.appendChild(row);
     });
