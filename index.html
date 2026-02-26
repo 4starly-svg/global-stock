@@ -4,80 +4,106 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Global Trade Capital</title>
+
 <style>
-body {
-    margin:0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #0b0f14;
-    color: #e6e6e6;
-}
-header {
-    background: #111820;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #222;
-}
-.logo {
-    font-size: 28px;
-    font-weight: bold;
-    color: #d4af37;
-}
-nav a {
-    color: #aaa;
-    margin-left: 20px;
-    text-decoration: none;
-    font-weight: bold;
-}
-nav a:hover { color: #d4af37; }
-
-.container {
-    padding: 25px;
-}
-.cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-.card {
-    background: #111820;
-    padding: 25px;
-    margin: 15px;
-    border-radius: 12px;
-    width: 280px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.4);
-    text-align: center;
-}
-.card h2 { margin-bottom: 10px; color: #d4af37; }
-.price { font-size: 28px; margin-top: 10px; }
-
-.testimonials, .contact {
-    background: #111820;
-    padding: 25px;
-    margin: 25px auto;
-    max-width: 900px;
-    border-radius: 12px;
-}
-.testimonials h2, .contact h2 { color: #d4af37; }
-.testimonials p, .contact p { margin-top: 12px; font-size: 16px; line-height: 1.5; }
-
-footer {
-    margin-top: 40px;
-    padding: 20px;
-    text-align: center;
-    font-size: 13px;
-    border-top: 1px solid #222;
-    color: #777;
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#0b0f14;
+color:#e6e6e6;
 }
 
-/* Scrollbars */
-.cards::-webkit-scrollbar, .container::-webkit-scrollbar {
-    width: 8px;
+header{
+background:#111820;
+padding:20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-bottom:1px solid #222;
 }
-.cards::-webkit-scrollbar-thumb, .container::-webkit-scrollbar-thumb {
-    background-color: #555;
-    border-radius: 4px;
+
+.logo{
+font-size:26px;
+font-weight:bold;
+color:#d4af37;
+}
+
+nav a{
+color:#aaa;
+margin-left:20px;
+text-decoration:none;
+font-weight:bold;
+}
+
+nav a:hover{
+color:#d4af37;
+}
+
+.lang-toggle{
+cursor:pointer;
+background:#d4af37;
+color:#111820;
+border:none;
+padding:8px 14px;
+border-radius:6px;
+font-weight:bold;
+}
+
+.container{
+padding:25px;
+}
+
+.cards{
+display:flex;
+flex-wrap:wrap;
+justify-content:space-around;
+}
+
+.card{
+background:#111820;
+padding:25px;
+margin:15px;
+border-radius:12px;
+width:280px;
+box-shadow:0 0 20px rgba(0,0,0,0.4);
+text-align:center;
+}
+
+.card h2{
+margin-bottom:10px;
+color:#d4af37;
+}
+
+.price{
+font-size:28px;
+margin-top:10px;
+}
+
+.section{
+background:#111820;
+padding:25px;
+margin:25px auto;
+max-width:900px;
+border-radius:12px;
+}
+
+.section h2{
+color:#d4af37;
+margin-bottom:15px;
+}
+
+footer{
+margin-top:40px;
+padding:20px;
+text-align:center;
+font-size:13px;
+border-top:1px solid #222;
+color:#777;
+}
+
+footer img{
+height:40px;
+margin:10px;
 }
 </style>
 </head>
@@ -86,61 +112,98 @@ footer {
 
 <header>
 <div class="logo">GLOBAL TRADE CAPITAL</div>
+
+<div>
+<button class="lang-toggle" onclick="toggleLang()">English / عربي</button>
+</div>
+
 <nav>
-<a href="stocks.html">Stocks</a>
-<a href="crypto.html">Crypto</a>
-<a href="fx.html">FX</a>
+<a href="#">Stocks</a>
+<a href="#">Crypto</a>
+<a href="#">FX</a>
 </nav>
 </header>
 
 <div class="container">
 
+<!-- LIVE MARKET CARDS -->
 <div class="cards">
+
 <div class="card">
-<h2>Bitcoin (BTC)</h2>
+<h2 data-en="Bitcoin (BTC)" data-ar="بتكوين">Bitcoin (BTC)</h2>
 <div class="price" id="btc">Loading...</div>
 </div>
+
 <div class="card">
-<h2>Apple (AAPL)</h2>
+<h2 data-en="Apple (AAPL)" data-ar="أبل">Apple (AAPL)</h2>
 <div class="price" id="aapl">Loading...</div>
 </div>
+
 <div class="card">
-<h2>Tesla (TSLA)</h2>
+<h2 data-en="Tesla (TSLA)" data-ar="تسلا">Tesla (TSLA)</h2>
 <div class="price" id="tsla">Loading...</div>
 </div>
-<!-- Add more cards as needed -->
+
+</div>
+
+<!-- NEWS -->
+<div class="section">
+<h2 data-en="Latest News" data-ar="آخر الأخبار">Latest News</h2>
+<div id="news">Loading news...</div>
 </div>
 
 <!-- TESTIMONIALS -->
-<div class="testimonials">
-<h2>Testimonials</h2>
-<p>“Global Trade Capital makes tracking my investments easy and fast. Highly recommend!” – Sarah M.</p>
-<p>“I love the real-time numbers and clean layout. It’s my go-to dashboard.” – Ahmed A.</p>
-<p>“Professional, sleek, and reliable. Exactly what I needed.” – Lina K.</p>
+<div class="section">
+<h2 data-en="Testimonials" data-ar="آراء العملاء">Testimonials</h2>
+<p>“Global Trade Capital makes tracking my investments easy and fast.”</p>
+<p>“Clean, professional, and reliable platform.”</p>
+<p>“Perfect for Libyan investors.”</p>
 </div>
 
-<!-- CONTACT US -->
-<div class="contact">
-<h2>Contact Us</h2>
+<!-- CONTACT -->
+<div class="section">
+<h2 data-en="Contact Us" data-ar="تواصل معنا">Contact Us</h2>
 <p>Email: support@globaltradecapital.com</p>
-<p>Phone (Libya): +218 91 234 5678</p>
-<p>Languages: English / Arabic</p>
+<p>Phone: +218 91 234 5678</p>
+<p data-en="Languages: English / Arabic" data-ar="اللغات: الإنجليزية / العربية">
+Languages: English / Arabic
+</p>
 </div>
 
 </div>
 
 <footer>
-© 2026 Global Trade Capital. All rights reserved.
+<p>© 2026 Global Trade Capital. All rights reserved.</p>
+
+<!-- Replace these with actual Libyan bank logo image files -->
+<img src="images/bank1.png" alt="Libyan Bank 1">
+<img src="images/bank2.png" alt="Libyan Bank 2">
+<img src="images/bank3.png" alt="Libyan Bank 3">
+
 </footer>
 
-<!-- API scripts -->
+<!-- YOUR EXISTING API FILES (DO NOT DELETE THESE FILES IN GITHUB) -->
 <script src="api/stocks.js"></script>
 <script src="api/crypto.js"></script>
 <script src="api/fx.js"></script>
+<script src="api/news.js"></script>
+
 <script>
-if (typeof loadStocks === "function") loadStocks();
-if (typeof loadCrypto === "function") loadCrypto();
-if (typeof loadFX === "function") loadFX();
+if(typeof loadStocks==="function") loadStocks();
+if(typeof loadCrypto==="function") loadCrypto();
+if(typeof loadFX==="function") loadFX();
+if(typeof loadNews==="function") loadNews();
+
+function toggleLang(){
+const elements=document.querySelectorAll('[data-en]');
+elements.forEach(el=>{
+if(el.innerText===el.dataset.en){
+el.innerText=el.dataset.ar;
+}else{
+el.innerText=el.dataset.en;
+}
+});
+}
 </script>
 
 </body>
